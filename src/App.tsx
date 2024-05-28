@@ -7,12 +7,14 @@ import Post from './pages/Post';
 import Resume from './pages/Resume';
 import Write from './pages/Write';
 import Header from './components/Header';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 function App() {
   const queryClient: QueryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      <Router>
+      <ReactQueryDevtools />
+      <Router basename={'/CNU_Blog'}>
         <Routes>
           <Route element={<Header />}>
             <Route element={<Layout />}>
@@ -20,11 +22,10 @@ function App() {
               <Route path="/resume" element={<Resume />} />
             </Route>
             <Route path="/posts/:postId" element={<Post />} />
-            <Route path="/write" element={<Write />} />
           </Route>
-          {/*todo (5-1) Write 추가*/}
+          <Route path="/write" element={<Write />} />
         </Routes>
-      </Router>{' '}
+      </Router>
     </QueryClientProvider>
   );
 }
